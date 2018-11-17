@@ -1,0 +1,100 @@
+package pizza;
+import java.util.Scanner;
+public class Top {
+    private int Size;
+    private int cheeCount;
+    private int pepCount;
+    private int hamCount;
+    Scanner choice = new Scanner(System.in);
+    Scanner chee = new Scanner(System.in);
+    Scanner pep = new Scanner(System.in);
+    Scanner ham = new Scanner(System.in);
+
+    public Top(){
+	this.cheeCount = 0;
+	this.pepCount = 0;
+	this.hamCount = 0;
+    }
+	
+    public String getSize(int a){
+        switch(a){
+            case 1:
+                return "Small";
+            case 2:
+                return "Medium";
+            case 3:
+                return "Large";
+            default:
+                return "";
+        }
+    }
+
+    public int getNumChee(){
+	return cheeCount;
+    }
+
+    public int getNumPep(){
+	return pepCount;
+    }
+
+    public int getNumHam(){
+	return hamCount;
+    }
+
+    public int tCount(){
+        return getNumChee() + getNumPep() + getNumHam();
+    }
+    
+    public double calcCost(){		
+	switch(Size){
+            case 1:
+                return 10 + (tCount() * 2);
+            case 2:
+                return 12 + (tCount() * 2);
+            case 3:
+                return 14 + (tCount() * 2);
+            default:
+                return 0.00;
+        }
+    }
+    public String noPizza(){
+        return "\nNo Pizza"
+                + "\nPizza cost: $" 
+                + calcCost() + "\n";
+    }
+    public String getDescription(){
+	return "\nPizza size: " + getSize(Size) + "\nCheese toppings: " 
+            + cheeCount + "\nPepperoni toppings: "
+            + pepCount + "\nHam toppings: " + hamCount
+            + "\nPizza cost: $" + calcCost() + "\n";
+    }
+    public void run(){
+        System.out.println("1.Small 2.Medium 3.Large");
+        System.out.print("Enter your size choice: ");
+        Size = choice.nextInt();
+        if(Size < 1 || Size > 3)
+            System.out.print(noPizza());
+        else{
+            System.out.print("How much Cheese Toppings: ");
+            cheeCount = chee.nextInt();
+            System.out.print("How much Pepperoni Toppings: ");
+            pepCount = pep.nextInt();
+            System.out.print("How much Ham Toppings: ");
+            hamCount = ham.nextInt();
+            System.out.print(getDescription());
+        }
+    }
+}
+
+
+
+
+
+package pizza;
+public class Pizza {
+    public static void main(String[] args) {
+        Top pizza = new Top();
+        pizza.run();
+    }
+    
+}
